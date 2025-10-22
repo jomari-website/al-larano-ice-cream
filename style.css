@@ -139,7 +139,7 @@ section {
   flex: 0 1 58%;                       /* prefer ~58% width for text */
   min-width: 320px;                    /* prevents collapsing too small */
   text-align: left;
-  padding-right: 320px;                 /* spacing to the image */
+  padding-right: 100px;                 /* spacing to the image */
   opacity: 0;
   animation: aboutTextIn 900ms ease forwards;
 }
@@ -313,7 +313,7 @@ section {
   background: var(--accent1);
   border: 2px dashed var(--primary);
   border-radius: 10px;
-  padding: 20px;
+  padding: 25px;
   margin-top: 25px;
   animation: slideFromRight 1.2s ease forwards;
 }
@@ -322,6 +322,12 @@ section {
   color: var(--accent2);
   margin-bottom: 10px;
   font-size: 1.2em;
+}
+
+.bulk-order a{
+  color: var(--accent2);
+  text-decoration: none;
+  font-weight: bold;
 }
 
 /* ===== BEST SELLERS (Flip Cards) ===== */
@@ -544,27 +550,30 @@ section {
   animation-delay: 0.3s;
 }
 
+/* Main container for contact info + image */
 .contact-container {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   flex-wrap: wrap;
+  column-gap: 60px; /* ✅ consistent horizontal spacing */
+  row-gap: 40px; /* for spacing on small screens */
 }
 
-/* Contact Info Container */
+/* Contact Info Card */
 .contact-info {
-  flex: 1 1 45%;
+  flex: 0 1 45%;
   background: var(--white);
   border-radius: 15px;
   padding: 30px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   text-align: left;
   opacity: 0;
-  transform: translateX(-80px);
-  animation: slideFromLeft 1.7s ease forwards;
+  transform: translateX(-100px);
+  animation: slideInwardLeft 1.7s ease forwards;
 }
 
-/* Contact Items (sequential animation) */
+/* Contact Items (Sequential Animation) */
 .contact-item {
   background: var(--secondary);
   margin: 12px 0;
@@ -606,11 +615,11 @@ section {
 
 /* Sticker Image */
 .contact-image {
-  flex: 1 1 45%;
+  flex: 0 1 45%;
   text-align: right;
   opacity: 0;
   transform: translateX(100px);
-  animation: slideFromRight 1.2s ease forwards;
+  animation: slideInwardRight 1.7s ease forwards;
   animation-delay: 1.2s;
 }
 
@@ -619,27 +628,52 @@ section {
   max-width: 400px;
   border-radius: 12px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  margin-left: 30px; /* ✅ ensures space between image and card */
 }
 
 /* ===== ANIMATIONS ===== */
-@keyframes slideFromLeft {
-  from { opacity: 0; transform: translateX(-80px); }
-  to { opacity: 1; transform: translateX(0); }
+@keyframes slideInwardLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-100px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
-@keyframes slideFromRight {
-  from { opacity: 0; transform: translateX(80px); }
-  to { opacity: 1; transform: translateX(0); }
+@keyframes slideInwardRight {
+  0% {
+    opacity: 0;
+    transform: translateX(100px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 @keyframes slideCardLeft {
-  from { opacity: 0; transform: translateX(-60px); }
-  to { opacity: 1; transform: translateX(0); }
+  0% {
+    opacity: 0;
+    transform: translateX(-60px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 @keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* ===== RESPONSIVE ===== */
@@ -647,6 +681,7 @@ section {
   .contact-container {
     flex-direction: column;
     text-align: center;
+    gap: 30px;
   }
 
   .contact-info {
@@ -658,9 +693,15 @@ section {
   .contact-image {
     text-align: center;
     margin-top: 30px;
-    animation: fadeInUp 1..7s ease forwards;
+    animation: fadeInUp 1.7s ease forwards;
+  }
+
+  .contact-image img {
+    margin-left: 0;
+    max-width: 300px;
   }
 }
+
 
 /* ===== FOOTER ===== */
 footer {
